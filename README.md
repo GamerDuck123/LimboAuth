@@ -18,13 +18,19 @@ Almost every aspect of Limbo Auth is customizable, down to the messages sent to 
 6. Start the server and enjoy Limbo Auth!
 
 ## API Documentation
-PlayerAuthEvent - Fires whenever a player logs in with the proper password!
-Variables:
+PlayerAuthEvent - Fires whenever a player logs in !
 ```
+/** Returns the player
+	 * 
+	 * @return The player variable
+	 */
 public Player getPlayer() {
   return player;
 }
-
+/** Returns whether or not the player used the right password
+	 * 
+	 * @return Whether or not the player used the right password
+	 */
 public Boolean isAuthorized() {
   return isAuth;
 }
