@@ -21,16 +21,17 @@ Almost every aspect of Limbo Auth is customizable, down to the messages sent to 
 PlayerAuthEvent - Fires whenever a player logs in !
 ```
 /** Returns the player
-	 * 
-	 * @return The player variable
-	 */
-public Player getPlayer() {
+* 
+* @return The player variable
+*/
+Player getPlayer() {
   return player;
 }
+	
 /** Returns whether or not the player used the right password
-	 * 
-	 * @return Whether or not the player used the right password
-	 */
+* 
+* @return Whether or not the player used the right password
+*/
 public Boolean isAuthorized() {
   return isAuth;
 }
