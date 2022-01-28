@@ -5,8 +5,6 @@ import com.loohp.limbo.events.EventHandler;
 import com.loohp.limbo.events.Listener;
 import com.loohp.limbo.events.player.PlayerMoveEvent;
 
-import net.md_5.bungee.api.ChatColor;
-
 public class PlayerMoveListener implements Listener {
 	
 	@EventHandler
@@ -14,11 +12,13 @@ public class PlayerMoveListener implements Listener {
 		if (!LimboAuthMain.a().getPlayerCache().getAuthStatus(e.getPlayer())) {
 			e.setCancelled(true);
 			if (LimboAuthMain.a().getDatabase().hasPassword(e.getPlayer())) {
-				e.getPlayer().sendMessage("/login");
-//				e.getPlayer().setTitleSubTitle(ChatColor.GREEN + "/login (password)", "Thank You!", 10, 10, 10);
+				e.getPlayer().setTitleSubTitle(LimboAuthMain.a().getMessages().getString("player-title-login-to-move"),
+						   LimboAuthMain.a().getMessages().getString("player-subtitle-login-to-move"), 
+						   0, 100, 0);
 			} else {
-				e.getPlayer().sendMessage("/register");
-//				e.getPlayer().setTitleSubTitle(ChatColor.GREEN + "/register (password) (password)", "Thank You!", 10, 10, 10);
+				e.getPlayer().setTitleSubTitle(LimboAuthMain.a().getMessages().getString("player-title-register-to-move"),
+						   LimboAuthMain.a().getMessages().getString("player-subtitle-register-to-move"), 
+						   0, 100, 0);
 			}
 		}
 	}

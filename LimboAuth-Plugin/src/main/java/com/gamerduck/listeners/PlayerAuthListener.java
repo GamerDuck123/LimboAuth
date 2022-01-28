@@ -21,9 +21,6 @@ public class PlayerAuthListener implements Listener {
 					LimboAuthMain.a().getServer().dispatchCommand(LimboAuthMain.a().getServer().getConsole(), cmd.replaceFirst("c:/", ""));
 				}
 			}
-			e.getPlayer().sendMessage("Logged in");
-		} else {
-			e.getPlayer().sendMessage("Wrong password!");
 		}
 	}
 }

@@ -66,10 +66,10 @@ public class Encrypt {
 	 private static void setHiddenAttrib(Path filePath) {		
 		    try {
 		      DosFileAttributes attr = Files.readAttributes(filePath, DosFileAttributes.class);
-		      System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
+//		      System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
 		      Files.setAttribute(filePath, "dos:hidden", true);
 		      attr = Files.readAttributes(filePath, DosFileAttributes.class);
-		      System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
+//		      System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
 		    } catch (IOException e) {
 		      e.printStackTrace();
 		    } 
@@ -78,7 +78,7 @@ public class Encrypt {
 class KeyGen
 {
    private final String ALGO = "AES";
-   private final int KEYSZ = 256;// 128 default; 192 and 256 also possible
+   private final int KEYSZ = 256;
    
    public KeyGen() {}
    
@@ -105,7 +105,7 @@ class KeyGen
 	   try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
 		    String line = bufferedReader.readLine();
 			   byte[] decodedKey = Base64.getDecoder().decode(line);
-			   System.out.println(line);
+//			   System.out.println(line);
 			   temp = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES"); 
 	   } catch (FileNotFoundException e ) {
 		   

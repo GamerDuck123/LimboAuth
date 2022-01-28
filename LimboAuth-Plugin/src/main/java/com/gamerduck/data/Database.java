@@ -19,7 +19,7 @@ public class Database {
     public Database(LimboPlugin main, String name) throws Exception {
     	File folder = new File(main.getDataFolder() + File.separator + "databases");
         folder.mkdirs();
-        Class.forName("org.sqlite.JDBC").newInstance();
+        Class.forName("org.sqlite.JDBC").getDeclaredConstructor().newInstance();
         connection = DriverManager.getConnection("jdbc:sqlite:" + new File(folder, name + ".db"));
         createTable("CREATE TABLE IF NOT EXISTS passwords (UUID VARCHAR(36) UNIQUE, PASSWORD VAR(36));");
     }
@@ -35,7 +35,7 @@ public class Database {
         info.setProperty("user", username);
         info.setProperty("password", password);
 
-        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Class.forName("com.mysql.jdbc.Driver").getDeclaredConstructor().newInstance();
         connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, info);
         createTable("CREATE TABLE IF NOT EXISTS passwords (UUID VARCHAR(36) UNIQUE, PASSWORD VAR(36));");
     }
@@ -80,34 +80,6 @@ public class Database {
     	}
     	return pass;
     }
-    
-    public void setGlobalEncryptionKey(String password) {
-	    	try (PreparedStatement insert = connection.prepareStatement("INSERT OR REPLACE INTO passwords VALUES (?, ?)")) {
-	            insert.setString(1, "GLOBAL");
-	            insert.setString(2, password);
-	            insert.executeUpdate();
-	        } catch (SQLException ex) {
-	            ex.printStackTrace();
-	        }
-    }
-    
-    public String getGlobalEncryptionKey() {
-    	String pass = "N/A";
-    	if (isEncryptionKey()) {
-	    	try (PreparedStatement select = connection.prepareStatement("SELECT PASSWORD FROM passwords WHERE UUID = ?")) {
-	            select.setString(1, "GLOBAL");
-	            try (ResultSet result = select.executeQuery()) {
-	                if (result.next()) {
-	                	pass = result.getString(1);
-	                }
-	            }
-	        } catch (SQLException ex) {
-	            ex.printStackTrace();
-	        }
-    	}
-    	return pass;
-    }
-    
     
     public boolean hasPassword(Player p) {
     	try (PreparedStatement select = connection.prepareStatement("SELECT UUID FROM passwords WHERE UUID = ?")) {

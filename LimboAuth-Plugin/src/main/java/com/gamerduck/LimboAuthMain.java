@@ -18,15 +18,22 @@ public class LimboAuthMain extends LimboPlugin {
 	PlayerCache playerCache;
 	Database database;
 	Encrypt encrypt;
-	private String key;
 	@Override
 	public void onEnable() {
 		instance = this;
 		configYAML = new ConfigYAML(this);
 		playerCache = new PlayerCache();
 		encrypt = new Encrypt();
+		System.out.println(getConfig().getBoolean("MySQL.Enabled"));
 		if (getConfig().getBoolean("MySQL.Enabled")) {
-			try {database = new Database(this, false, getName(), getName(), getName(), getName(), 0);
+			try {database = new Database(
+					this, 
+					getConfig().getBoolean("MySQL.AutoReconnect"),
+					getConfig().getString("MySQL.Host"), 
+					getConfig().getString("MySQL.Database"), 
+					getConfig().getString("MySQL.Username"), 
+					getConfig().getString("MySQL.Password"), 
+					getConfig().getInteger("MySQL.Port"));
 			} catch (Exception e) {e.printStackTrace();}
 		} else {
 			try {database = new Database(this, "database");
